@@ -25,18 +25,13 @@ def add_to_cart():
         item_company = request.json.get("item_company")
         quantity = request.json.get("quantity")
         price = request.json.get("price")
+        cart_session_id = request.json.get("cart_session_id")
 
-        # Input validation
         if not all([item_type, item_name, item_company, quantity, price]):
             return jsonify({"message": "All fields are required"}), 400
-        
-        if not isinstance(quantity, int) or quantity <= 0:
-            return jsonify({"message": "Invalid quantity"}), 400
-        
-        if not isinstance(price, (int, float)) or price <= 0:
-            return jsonify({"message": "Invalid price"}), 400
 
         new_item = Cart(
+            cart_session_id=cart_session_id,
             item_type=item_type,
             item_name=item_name,
             item_company=item_company,
@@ -47,8 +42,12 @@ def add_to_cart():
         db.session.add(new_item)
         db.session.commit()
         
-        Cart.update_cart_total()
-        return jsonify({"message": "Items added to cart!", "item": new_item.to_json()}), 201
+        Cart.update_cart_total(new_item.cart_session_id)
+        return jsonify({
+            "message": "Items added to cart!", 
+            "item": new_item.to_json(),
+            "cartSessionId": new_item.cart_session_id
+        }), 201
 
     except Exception as e:
         db.session.rollback()
@@ -70,8 +69,11 @@ def update_cart(item_id):
         item.calculate_total_item_price()
         db.session.commit()
         
-        Cart.update_cart_total()
-        return jsonify({"message": "Cart updated", "item": item.to_json()}), 200
+        Cart.update_cart_total(item.cart_session_id)
+        return jsonify({
+            "message": "Cart updated", 
+            "item": item.to_json()
+        }), 200
 
     except Exception as e:
         db.session.rollback()
@@ -84,11 +86,21 @@ def remove_from_cart(item_id):
         if not item:
             return jsonify({"message": "Item not found"}), 404
 
+        # Store the cart_session_id before deleting the item
+        cart_session_id = item.cart_session_id
+        
         db.session.delete(item)
         db.session.commit()
         
-        Cart.update_cart_total()
-        return jsonify({"message": "Item removed from cart"}), 200
+        # Update cart total for remaining items in the same cart session
+        remaining_items = Cart.query.filter_by(cart_session_id=cart_session_id).all()
+        if remaining_items:
+            Cart.update_cart_total(cart_session_id)
+        
+        return jsonify({
+            "message": "Item removed from cart",
+            "cartSessionId": cart_session_id
+        }), 200
 
     except Exception as e:
         db.session.rollback()
@@ -115,22 +127,19 @@ def get_order(order_id):
 @app.route("/create_order", methods=["POST"])
 def create_order():
     try:
-        cart_id = request.json.get("cart_id")
-        total_amount = request.json.get("total_amount")
+        cart_session_id = request.json.get("cart_session_id")
 
-        if not cart_id or not total_amount:
-            return jsonify({"message": "Cart ID and total amount are required"}), 400
+        if not cart_session_id:
+            return jsonify({"message": "Cart session ID is required"}), 400
 
-        # Verify cart exists
-        cart = Cart.query.get(cart_id)
-        if not cart:
+        cart_items = Cart.query.filter_by(cart_session_id=cart_session_id).all()
+        if not cart_items:
             return jsonify({"message": "Cart not found"}), 404
 
-        if not isinstance(total_amount, (int, float)) or total_amount <= 0:
-            return jsonify({"message": "Invalid total amount"}), 400
+        total_amount = cart_items[0].total_cart_price
 
         new_order = Order(
-            cart_id=cart_id,
+            cart_session_id=cart_session_id,
             order_date=datetime.now(),
             total_amount=total_amount
         )
