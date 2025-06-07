@@ -43,8 +43,11 @@ def add_to_cart():
             quantity=quantity,
             price=price
         )
+        new_item.calculate_total_item_price()
         db.session.add(new_item)
         db.session.commit()
+        
+        Cart.update_cart_total()
         return jsonify({"message": "Items added to cart!", "item": new_item.to_json()}), 201
 
     except Exception as e:
@@ -62,10 +65,12 @@ def update_cart(item_id):
         item.quantity = data.get("quantity", item.quantity)
 
         if not isinstance(item.quantity, int) or item.quantity <= 0:
-            return (jsonify(
-                {"message": "Invalid quantity"}), 400
-            )
+            return jsonify({"message": "Invalid quantity"}), 400
+            
+        item.calculate_total_item_price()
         db.session.commit()
+        
+        Cart.update_cart_total()
         return jsonify({"message": "Cart updated", "item": item.to_json()}), 200
 
     except Exception as e:
@@ -81,6 +86,8 @@ def remove_from_cart(item_id):
 
         db.session.delete(item)
         db.session.commit()
+        
+        Cart.update_cart_total()
         return jsonify({"message": "Item removed from cart"}), 200
 
     except Exception as e:
