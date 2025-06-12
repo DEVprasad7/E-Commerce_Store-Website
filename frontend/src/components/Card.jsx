@@ -1,19 +1,11 @@
 import { IoMdHeartEmpty } from "react-icons/io";
 import Button from "./Button";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";
 
 const Card = ({ img, title, star, reviews, prevPrice, newPrice }) => {
   const addToCart = () => {
     toast.success("Product added to cart!", {
-      position: "bottom-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-      theme: "light",
+      duration: 2000,
     });
   };
 

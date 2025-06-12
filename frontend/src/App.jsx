@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 import Navigation from "./Navigation/Nav";
 import Products from "./Products/Products";
 import products from "./db/data";
@@ -7,7 +7,6 @@ import Recommended from "./Recommended/Recommended";
 import Sidebar from "./Sidebar/Sidebar";
 import Card from "./components/Card";
 import "./index.css";
-import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -76,18 +75,22 @@ function App() {
       <Navigation query={query} handleInputChange={handleInputChange} />
       <Recommended handleClick={handleClick} />
       <Products result={result} />
-      <ToastContainer
-        position="bottom-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={true}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable={false}
-        pauseOnHover
-        theme="light"
-        
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 2000,
+          style: {
+            background: "#ffffff",
+            color: "#363636",
+          },
+          success: {
+            duration: 2000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
       />
     </>
   );
