@@ -1,6 +1,10 @@
-const Button = ({ onClickHandler, value, title }) => {
+const Button = ({ onClickHandler, value, title, className = "" }) => {
   return (
-    <button onClick={onClickHandler} value={value} className="btns">
+    <button 
+      onClick={onClickHandler} 
+      value={value} 
+      className={`btns ${className}`}
+    >
       {title}
     </button>
   );

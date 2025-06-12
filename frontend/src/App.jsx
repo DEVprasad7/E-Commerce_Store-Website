@@ -18,7 +18,7 @@ function App() {
   };
 
   const filteredItems = products.filter(
-    (product) => product.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
+    (product) => product.title.toLowerCase().startsWith(query.toLowerCase())
   );
 
   // ----------- Radio Filtering -----------

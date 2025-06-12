@@ -1,4 +1,5 @@
 import { BsFillBagFill } from "react-icons/bs";
+import  Button  from "./Button";
 
 const Card = ({ img, title, star, reviews, prevPrice, newPrice }) => {
   return (
@@ -17,6 +18,13 @@ const Card = ({ img, title, star, reviews, prevPrice, newPrice }) => {
             </div>
             <div className="bag">
               <BsFillBagFill className="bag-icon" />
+            </div>
+            <div className="add-to-cart">
+              <Button className="cart-btn"
+                onClickHandler={() => alert("Added to cart!")}
+                value="Add to Cart"
+                title="Add to Cart"
+              />
             </div>
           </section>
         </div>

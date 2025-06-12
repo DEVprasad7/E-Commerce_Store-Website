@@ -9,3 +9,15 @@
   margin-top: 20px;
   font-size: 20px;
 }
+
+.btns.active {
+  background-color: #f0f0f0;
+  border-color: #666;
+  color: #000;
+  font-weight: 500;
+}
+
+.btns:hover {
+  background-color: #f8f8f8;
+  border-color: #888;
+}
