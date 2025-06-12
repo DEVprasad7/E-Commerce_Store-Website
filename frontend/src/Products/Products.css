@@ -9,7 +9,8 @@
 }
 
 .card {
-  margin: 20px;
+  margin-bottom: 30px;
+  margin-left: 60px;
   border: 2px solid #ededed;
   padding: 20px;
   cursor: pointer;
@@ -17,6 +18,7 @@
   height: 400px; /* Fixed height for consistent card size */
   display: flex;
   flex-direction: column;
+  flex-grow: 0;
 }
 
 .card-img {
@@ -72,6 +74,11 @@
 .bag {
   display: flex;
   align-items: center;
+}
+
+.bag-icon {
+  font-size: 1.25rem;
+  color:rgb(59, 59, 59)
 }
 
 .add-to-cart {

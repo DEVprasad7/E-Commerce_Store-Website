@@ -1,7 +1,22 @@
-import { BsFillBagFill } from "react-icons/bs";
-import  Button  from "./Button";
+import { IoMdHeartEmpty } from "react-icons/io";
+import Button from "./Button";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Card = ({ img, title, star, reviews, prevPrice, newPrice }) => {
+  const addToCart = () => {
+    toast.success("Product added to cart!", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   return (
     <>
       <section className="card">
@@ -17,11 +32,12 @@ const Card = ({ img, title, star, reviews, prevPrice, newPrice }) => {
               <del>{prevPrice}</del> {newPrice}
             </div>
             <div className="bag">
-              <BsFillBagFill className="bag-icon" />
+              <IoMdHeartEmpty className="bag-icon" />
             </div>
             <div className="add-to-cart">
-              <Button className="cart-btn"
-                onClickHandler={() => alert("Added to cart!")}
+              <Button
+                className="cart-btn"
+                onClickHandler={addToCart}
                 value="Add to Cart"
                 title="Add to Cart"
               />
