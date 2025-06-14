@@ -31,7 +31,7 @@ const Card = ({ img, title, star, reviews, prevPrice, newPrice }) => {
                 className="cart-btn"
                 onClickHandler={addToCart}
                 value="Add to Cart"
-                title="Add to Cart"
+                title="🛒 Add to Cart"
               />
             </div>
           </section>

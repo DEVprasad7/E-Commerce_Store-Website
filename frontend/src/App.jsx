@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Toaster } from "react-hot-toast";
 import Navigation from "./Navigation/Nav";
 import Products from "./Products/Products";
 import products from "./db/data";
@@ -75,23 +74,6 @@ function App() {
       <Navigation query={query} handleInputChange={handleInputChange} />
       <Recommended handleClick={handleClick} />
       <Products result={result} />
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          duration: 2000,
-          style: {
-            background: "#ffffff",
-            color: "#363636",
-          },
-          success: {
-            duration: 2000,
-            theme: {
-              primary: "green",
-              secondary: "black",
-            },
-          },
-        }}
-      />
     </>
   );
 }

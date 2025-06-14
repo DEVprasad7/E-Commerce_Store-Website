@@ -1,8 +1,11 @@
 import { FiHeart } from "react-icons/fi";
-import { AiOutlineShoppingCart, AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
+import { SignedIn, SignedOut, useClerk, UserButton } from "@clerk/clerk-react";
 import "./Nav.css";
 
 const Nav = ({ handleInputChange, query }) => {
+  const { openSignIn } = useClerk();
+
   return (
     <nav>
       <div className="nav-container">
@@ -15,18 +18,27 @@ const Nav = ({ handleInputChange, query }) => {
         />
       </div>
       <div className="profile-container">
-        <a href="#">
-          <FiHeart className="nav-icons" />
-        </a>
-        <a href="">
-          <AiOutlineShoppingCart className="nav-icons" />
-        </a>
-        <a href="">
-          <AiOutlineUserAdd className="nav-icons" />
-        </a>
+        <FiHeart className="nav-icons" />
+        <AiOutlineShoppingCart className="nav-icons" />
+        <SignedIn>
+          <div className="user-button-container">
+            <UserButton
+              appearance={{
+                elements: { userButtonAvatarBox: "user-button" },
+              }}
+            />
+          </div>
+        </SignedIn>
+        <SignedOut>
+          <AiOutlineUser
+            className="nav-icons signin-icon"
+            onClick={() => openSignIn()}
+          />
+        </SignedOut>
       </div>
     </nav>
   );
 };
 
 export default Nav;
+
