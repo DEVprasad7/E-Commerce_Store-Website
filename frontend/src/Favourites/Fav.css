@@ -1,0 +1,78 @@
+.favourites-container {
+  margin: 2rem auto;
+  padding: 2rem;
+  min-height: 80vh;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.no-favourites {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  color: #666;
+}
+
+.heart-icon {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  color: #ff4d4d;
+}
+
+.no-favourites h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.no-favourites p {
+  font-size: 1rem;
+  color: #888;
+}
+
+.favourites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+  justify-items: center;
+  margin: 0 auto;
+}
+
+.favourite-card {
+  border: 2px solid #ededed;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.favourite-card:hover {
+  transform: translateY(-5px);
+}
+
+.favourite-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background: white;
+  padding: 1rem;
+}
+
+.favourite-details {
+  padding: 1rem;
+}
+
+.favourite-details h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.favourite-details .price {
+  font-weight: bold;
+  color: #2c2c2c;
+}

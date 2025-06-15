@@ -5,9 +5,9 @@ nav {
   align-items: center;
   padding: 1rem 2rem;
   z-index: 999;
-  margin-left: 15rem;
+  margin-left: var(--nav-margin, 15rem);
   background-color: white;
-  width: calc(100% - 15rem);
+  width: calc(100% - var(--nav-margin, 15rem));
   position: relative;
 }
 
@@ -71,4 +71,3 @@ input {
   display: flex;
   align-items: center;
 }
-

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Favourites from "./Favourites/Fav";
 import Navigation from "./Navigation/Nav";
 import Products from "./Products/Products";
 import products from "./db/data";
@@ -9,6 +10,13 @@ import "./index.css";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [showFavourites, setShowFavourites] = useState(false);
+  const [favourites, setFavourites] = useState([]);
+
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || {};
+    setFavourites(Object.values(storedFavorites));
+  }, [showFavourites]);
 
   // ----------- Input Filter -----------
   const [query, setQuery] = useState("");
@@ -68,12 +76,26 @@ function App() {
 
   const result = filteredData(products, selectedCategory, query);
 
+  const toggleFavourites = () => {
+    setShowFavourites(!showFavourites);
+  };
+
   return (
     <>
-      <Sidebar handleChange={handleChange} />
-      <Navigation query={query} handleInputChange={handleInputChange} />
-      <Recommended handleClick={handleClick} />
-      <Products result={result} />
+      {!showFavourites && <Sidebar handleChange={handleChange} />}
+      <Navigation
+        query={query}
+        handleInputChange={handleInputChange}
+        onFavClick={toggleFavourites}
+      />
+      {showFavourites ? (
+        <Favourites favourites={favourites} />
+      ) : (
+        <>
+          <Recommended handleClick={handleClick} />
+          <Products result={result} />
+        </>
+      )}
     </>
   );
 }

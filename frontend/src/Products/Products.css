@@ -78,7 +78,18 @@
 
 .bag-icon {
   font-size: 1.25rem;
-  color:rgb(59, 59, 59)
+  color: rgb(59, 59, 59);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bag-icon.favorite {
+  color: #ff4d4d;
+  transform: scale(1.1);
+}
+
+.bag-icon:hover {
+  transform: scale(1.1);
 }
 
 .add-to-cart {
@@ -89,8 +100,3 @@
   align-items: center;
   flex-wrap: wrap;
 }
-
-
-
-
-
