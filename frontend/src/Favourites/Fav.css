@@ -33,46 +33,63 @@
 }
 
 .favourites-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  padding: 1rem;
-  justify-items: center;
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 1rem;
+  align-items: center;
+  align-content: center;
+  margin-top: 2rem;
+  z-index: -2;
 }
 
 .favourite-card {
+  margin-bottom: 30px;
+  margin-left: 60px;
   border: 2px solid #ededed;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.2s ease;
+  border-radius: 20px;
+  padding: 20px;
+  cursor: pointer;
+  width: 300px; /* Fixed width for consistent card size */
+  height: 400px; /* Fixed height for consistent card size */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
 }
 
 .favourite-card:hover {
   transform: translateY(-5px);
+  transition: transform 0.2s ease-in-out;
 }
 
 .favourite-card img {
   width: 100%;
-  height: 200px;
-  object-fit: contain;
-  background: white;
-  padding: 1rem;
+  height: 200px; /* Fixed height for images */
+  object-fit: contain; /* Maintain aspect ratio */
+  margin-bottom: 1rem;
 }
 
 .favourite-details {
-  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .favourite-details h3 {
   font-size: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  /* Handle text overflow */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .favourite-details .price {
+  margin-top: auto; /* Push price section to bottom */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
   font-weight: bold;
   color: #2c2c2c;
 }

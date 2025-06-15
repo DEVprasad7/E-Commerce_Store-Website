@@ -7,7 +7,7 @@ const Favourites = ({ favourites = [] }) => {
       {favourites.length === 0 ? (
         <div className="no-favourites">
           <IoMdHeartEmpty className="heart-icon" />
-          <h2>No Favourites Yet</h2>
+          <h2>Nothing to show</h2>
           <p>Start adding products you love to your favourites!</p>
         </div>
       ) : (
