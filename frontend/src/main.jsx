@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
       <App />
       <Toaster
-        position="bottom-right"
+        position="top-center"
         toastOptions={{
           duration: 2000,
           style: {

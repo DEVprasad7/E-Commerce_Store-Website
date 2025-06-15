@@ -28,10 +28,17 @@ const Card = ({ img, title, star, reviews, prevPrice, newPrice }) => {
     localStorage.setItem("favorites", JSON.stringify(newFavorites));
     setIsFavorite(!isFavorite);
 
-    toast.success(
-      !isFavorite ? "Added to favorites!" : "Removed from favorites!",
-      { duration: 1500 }
-    );
+   if (!isFavorite) {
+      toast("Added to favourites!", {
+        icon:'😍',
+        duration: 2000,
+      });
+    } else {
+      toast("Removed from favourites!", {
+        icon:'🥺',
+        duration: 2000,
+      });
+    }
   };
 
   const addToCart = () => {
