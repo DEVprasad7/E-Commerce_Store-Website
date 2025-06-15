@@ -19,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         toastOptions={{
           duration: 2000,
           style: {
+            borderRadius: "20px",
             background: "#ffffff",
             color: "#363636",
           },

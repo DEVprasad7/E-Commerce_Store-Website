@@ -32,11 +32,17 @@ const Card = ({ img, title, star, reviews, prevPrice, newPrice }) => {
       toast("Added to favourites!", {
         icon:'😍',
         duration: 2000,
+        style: {
+          borderRadius: "20px",
+        },
       });
     } else {
       toast("Removed from favourites!", {
         icon:'🥺',
         duration: 2000,
+        style: {
+          borderRadius: "20px",
+        },
       });
     }
   };
