@@ -1,0 +1,107 @@
+.orders-container {
+  margin: 2rem auto;
+  padding: 2rem;
+  min-height: 80vh;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.no-orders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  color: #666;
+}
+
+.cart-icon {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  color: #2196f3;
+}
+
+.no-orders h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.no-orders p {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 2rem;
+}
+
+.start-shopping-btn {
+  padding: 12px 24px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.start-shopping-btn:hover {
+  background-color: #1976d2;
+}
+
+.orders-flex {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.order-card {
+  border: 1px solid #ededed;
+  border-radius: 15px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out;
+}
+
+.order-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.order-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-details h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.order-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.order-price .price {
+  font-weight: bold;
+  color: #2c2c2c;
+  font-size: 1.1rem;
+}
+
+.order-price .quantity {
+  color: #666;
+  font-size: 0.9rem;
+}

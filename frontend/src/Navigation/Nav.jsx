@@ -3,7 +3,7 @@ import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
 import { SignedIn, SignedOut, useClerk, UserButton } from "@clerk/clerk-react";
 import "./Nav.css";
 
-const Nav = ({ handleInputChange, query, onFavClick }) => {
+const Nav = ({ handleInputChange, query, onFavClick, onCartClick }) => {
   const { openSignIn } = useClerk();
 
   return (
@@ -19,7 +19,7 @@ const Nav = ({ handleInputChange, query, onFavClick }) => {
       </div>
       <div className="profile-container">
         <FiHeart className="nav-icons" onClick={onFavClick} />
-        <AiOutlineShoppingCart className="nav-icons" />
+        <AiOutlineShoppingCart className="nav-icons" onClick={onCartClick} />
         <SignedIn>
           <div className="user-button-container">
             <UserButton

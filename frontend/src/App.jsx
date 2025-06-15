@@ -6,17 +6,23 @@ import products from "./db/data";
 import Recommended from "./Recommended/Recommended";
 import Sidebar from "./Sidebar/Sidebar";
 import Card from "./components/Card";
+import Orders from "./Orders/Order";
 import "./index.css";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showFavourites, setShowFavourites] = useState(false);
   const [favourites, setFavourites] = useState([]);
+  const [showOrders, setShowOrders] = useState(false);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || {};
     setFavourites(Object.values(storedFavorites));
-  }, [showFavourites]);
+
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setOrders(storedCart);
+  }, [showFavourites, showOrders]);
 
   // ----------- Input Filter -----------
   const [query, setQuery] = useState("");
@@ -77,18 +83,29 @@ function App() {
   const result = filteredData(products, selectedCategory, query);
 
   const toggleFavourites = () => {
+    setShowOrders(false); // Reset orders view
     setShowFavourites(!showFavourites);
+  };
+
+  const toggleOrders = () => {
+    setShowFavourites(false); // Reset favourites view
+    setShowOrders(!showOrders);
   };
 
   return (
     <>
-      {!showFavourites && <Sidebar handleChange={handleChange} />}
+      {!showFavourites && !showOrders && (
+        <Sidebar handleChange={handleChange} />
+      )}
       <Navigation
         query={query}
         handleInputChange={handleInputChange}
         onFavClick={toggleFavourites}
+        onCartClick={toggleOrders}
       />
-      {showFavourites ? (
+      {showOrders ? (
+        <Orders orders={orders} />
+      ) : showFavourites ? (
         <Favourites favourites={favourites} />
       ) : (
         <>
