@@ -11,7 +11,7 @@ const Favourites = ({ favourites = [] }) => {
           <p>Start adding products you love to your favourites!</p>
         </div>
       ) : (
-        <div className="favourites-grid">
+        <div className="favourites-flex">
           {favourites.map((product) => (
             <div key={product.id} className="favourite-card">
               <img src={product.img} alt={product.title} />
