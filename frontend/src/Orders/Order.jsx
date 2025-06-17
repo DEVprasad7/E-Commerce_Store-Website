@@ -13,7 +13,7 @@ const Orders = ({ orders = [] }) => {
             className="start-shopping-btn"
             onClick={() => (window.location.href = "/")}
           >
-            Start Shopping
+            Explore
           </button>
         </div>
       ) : (
